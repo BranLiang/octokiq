@@ -7,11 +7,12 @@ module Octokiq
     end
 
     def fetch(queues)
-      redis.blpop(*build_queues(queues), 0)
+      _, job = redis.blpop(*build_queues(queues), 0)
+      JSON.parse(job)
     end
 
     def push(queue, data)
-      redis.rpush(build_queue(queue), data)
+      redis.rpush(build_queue(queue), data.to_json)
     end
 
     private

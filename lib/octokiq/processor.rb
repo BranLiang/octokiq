@@ -6,8 +6,10 @@ module Octokiq
     end
 
     def run
-      # Run the job
-      puts job
+      Octokiq.logger.info "Job: #{job}"
+      klass = job.fetch(Worker::CLASS_KEY)
+      args = job.fetch(Worker::ARGS_KEY)
+      Object.const_get(klass).new.perform(*args)
     end
   end
 end

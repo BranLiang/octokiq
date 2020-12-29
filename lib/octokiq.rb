@@ -33,6 +33,6 @@ module Octokiq
   end
 
   def logger
-    @logger ||= Logger.new(STDOUT)
+    Logger.new($stdout)
   end
 end

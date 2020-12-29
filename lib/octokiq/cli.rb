@@ -2,21 +2,15 @@ module Octokiq
   class CLI
     def run
       puts logo
-      handle_signal
       server.start
+    rescue Interrupt
+      Octokiq.logger.info 'Bye!'
     end
 
     private
 
     def server
       @server ||= Server.new
-    end
-
-    def handle_signal
-      Signal.trap('INT') do
-        Octokiq.logger.info 'Bye!'
-        exit
-      end
     end
 
     def logo
