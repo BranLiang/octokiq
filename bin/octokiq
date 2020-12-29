@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'octokiq'
+
+cli = Octokiq::CLI.new
+cli.run

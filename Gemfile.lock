@@ -1,0 +1,23 @@
+PATH
+  remote: .
+  specs:
+    octokiq (0.1.0)
+      redis (~> 4.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.14.2)
+    rake (12.3.3)
+    redis (4.2.5)
+
+PLATFORMS
+  x86_64-darwin-19
+
+DEPENDENCIES
+  minitest (~> 5.0)
+  octokiq!
+  rake (~> 12.0)
+
+BUNDLED WITH
+   2.2.3
