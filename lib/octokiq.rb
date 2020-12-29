@@ -3,6 +3,7 @@ require 'redis'
 require 'etc'
 require 'logger'
 require 'json'
+require 'optparse'
 
 require 'octokiq/version'
 require 'octokiq/configuration'
@@ -10,7 +11,7 @@ require 'octokiq/connection'
 require 'octokiq/worker'
 require 'octokiq/processor'
 require 'octokiq/server'
-require 'octokiq/cli'
+require 'octokiq/cmd'
 
 module Octokiq
   extend self

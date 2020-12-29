@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+../../exe/octokiq -r dummy_worker.rb

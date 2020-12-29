@@ -4,8 +4,6 @@ require 'bundler/setup'
 require 'pry-byebug'
 require 'octokiq'
 
-require_relative '../examples/plain_ruby/dummy_worker'
-
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 

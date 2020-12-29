@@ -1,0 +1,19 @@
+PATH
+  remote: ../..
+  specs:
+    octokiq (0.1.0)
+      redis (~> 4.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    redis (4.2.5)
+
+PLATFORMS
+  x86_64-darwin-19
+
+DEPENDENCIES
+  octokiq!
+
+BUNDLED WITH
+   2.2.3

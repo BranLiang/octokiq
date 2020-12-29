@@ -1,5 +1,5 @@
 module Octokiq
-  class CLI
+  class CMD
     def run
       puts logo
       server.start

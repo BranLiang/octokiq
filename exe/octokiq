@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'octokiq'
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: bundle exec octokiq [options]'
+
+  opts.on '-r', '--require [PATH]', 'Location of file to require' do |arg|
+    require File.expand_path(arg)
+  end
+end.parse!
+
+cmd = Octokiq::CMD.new
+cmd.run
