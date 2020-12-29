@@ -2,6 +2,7 @@ require 'redis'
 
 require 'etc'
 require 'logger'
+require 'json'
 
 require 'octokiq/version'
 require 'octokiq/configuration'
@@ -25,6 +26,10 @@ module Octokiq
 
   def server_connection
     @server_connection ||= Connection.new
+  end
+
+  def client_connection
+    @client_connection ||= Connection.new
   end
 
   def logger

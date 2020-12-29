@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
-require "octokiq"
+require 'bundler/setup'
+require 'pry-byebug'
+require 'octokiq'
+
+require_relative '../examples/plain_ruby/dummy_worker'
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
@@ -10,5 +13,5 @@ require "octokiq"
 # require "pry"
 # Pry.start
 
-require "irb"
+require 'irb'
 IRB.start(__FILE__)

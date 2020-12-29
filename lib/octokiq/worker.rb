@@ -2,6 +2,7 @@ module Octokiq
   module Worker
     def self.included(base)
       base.extend(ClassMethods)
+      base.queue(Octokiq.configuration.default_queue)
     end
 
     module ClassMethods
@@ -9,8 +10,14 @@ module Octokiq
         client_push('class' => self, 'args' => args)
       end
 
+      def queue(name)
+        @@queue = name
+      end
+
+      private
+
       def client_push(item)
-        # push data to redis
+        Octokiq.client_connection.push(@@queue, item.to_json)
       end
     end
   end
