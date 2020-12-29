@@ -1,7 +1,7 @@
 module Octokiq
   class Processor
     attr_accessor :job
-    def initilize(job)
+    def initialize(job)
       @job = job
     end
 

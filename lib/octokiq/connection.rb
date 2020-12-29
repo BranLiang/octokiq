@@ -6,18 +6,30 @@ module Octokiq
       @redis = Redis.new
     end
 
-    def fetch(queue)
+    def fetch(queues)
       redis.blpop(
-        "#{Octokiq.configuration.queue_prefix}:#{queue}",
+        *build_queues(queues),
         Octokiq.configuration.fetch_timeout
       )
     end
 
     def push(queue, data)
       redis.rpush(
-        "#{Octokiq.configuration.queue_prefix}:#{queue}",
+        build_queue(queue),
         data
       )
+    end
+
+    private
+
+    def build_queues(queues)
+      queues.map do |q|
+        build_queue(q)
+      end
+    end
+
+    def build_queue(queue)
+      "#{Octokiq.configuration.queue_prefix}:#{queue}"
     end
   end
 end

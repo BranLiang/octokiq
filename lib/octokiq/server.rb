@@ -10,7 +10,7 @@ module Octokiq
       end
 
       loop do
-        _, job = Ractor.select(*queues)
+        job = Octokiq.server_connection.fetch(queues)
         pipe << job
       end
     end
@@ -18,14 +18,7 @@ module Octokiq
     private
 
     def queues
-      @queues ||= Octokiq.configuration.queues.map do |queue|
-        Ractor.new(queue) do |q|
-          connection = Connection.new
-          loop do
-            Ractor.yield connection.fetch(q)
-          end
-        end
-      end
+      Octokiq.configuration.queues
     end
 
     def pipe

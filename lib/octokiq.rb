@@ -6,6 +6,7 @@ require 'octokiq/version'
 require 'octokiq/configuration'
 require 'octokiq/connection'
 require 'octokiq/worker'
+require 'octokiq/processor'
 require 'octokiq/server'
 require 'octokiq/cli'
 
@@ -19,5 +20,9 @@ module Octokiq
 
   def configuration
     @configuration ||= Configuration.new
+  end
+
+  def server_connection
+    @server_connection ||= Connection.new
   end
 end
