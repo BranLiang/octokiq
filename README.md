@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO
+Run worker server:
+
+    $ bundle exec octokiq
 
 ## Development
 
