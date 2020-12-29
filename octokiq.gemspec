@@ -4,17 +4,17 @@ Gem::Specification.new do |spec|
   spec.name          = 'octokiq'
   spec.version       = Octokiq::VERSION
   spec.authors       = ['Bran Liang']
-  spec.email         = ['bran.liang@shopify.com']
+  spec.email         = ['bran@corran.cn']
 
-  spec.summary       = 'Background job with multi core support.'
-  spec.description   = 'Ultimate simple background job.'
+  spec.summary       = 'Next generation background processing for ruby'
+  spec.description   = 'Ractor based worker system.'
   spec.homepage      = 'https://github.com/BranLiang/octokiq'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 3.0.0')
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = "https://github.com/BranLiang/octokiq"
-  spec.metadata['changelog_uri'] = "https://github.com/BranLiang/octokiq/CHANGELOG.md"
+  spec.metadata['source_code_uri'] = 'https://github.com/BranLiang/octokiq'
+  spec.metadata['changelog_uri'] = 'https://github.com/BranLiang/octokiq/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
