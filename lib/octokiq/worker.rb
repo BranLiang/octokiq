@@ -26,7 +26,7 @@ module Octokiq
       end
 
       def octokiq_options(opts)
-        opts.slice(Configuration::OPTIONS).each do |key, value|
+        opts.slice(*Configuration::OPTIONS).each do |key, value|
           configuration.instance_variable_set("@#{key}", value)
         end
       end
