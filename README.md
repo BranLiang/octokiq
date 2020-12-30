@@ -20,9 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Run worker server:
-
-    $ bundle exec octokiq
+https://github.com/BranLiang/octokiq/tree/main/examples
 
 ## Development
 
