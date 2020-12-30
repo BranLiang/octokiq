@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gem 'octokiq', :path => '../..'
+gem 'sidekiq', '~> 6.1'
+gem 'redis'

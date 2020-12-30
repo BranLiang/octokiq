@@ -1,0 +1,27 @@
+PATH
+  remote: ../..
+  specs:
+    octokiq (0.1.1)
+      redis (~> 4.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    connection_pool (2.2.3)
+    rack (2.2.3)
+    redis (4.2.5)
+    sidekiq (6.1.2)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
+
+PLATFORMS
+  x86_64-darwin-19
+
+DEPENDENCIES
+  octokiq!
+  redis
+  sidekiq (~> 6.1)
+
+BUNDLED WITH
+   2.2.3
