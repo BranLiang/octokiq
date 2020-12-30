@@ -3,9 +3,17 @@ module Octokiq
     CLASS_KEY = 'class'.freeze
     ARGS_KEY = 'args'.freeze
 
+    class Configuration
+      OPTIONS = [:queue].freeze
+      attr_accessor(*OPTIONS)
+
+      def initialize
+        @queue = Octokiq.configuration.default_queue
+      end
+    end
+
     def self.included(base)
       base.extend(ClassMethods)
-      base.queue(Octokiq.configuration.default_queue)
     end
 
     module ClassMethods
@@ -13,14 +21,20 @@ module Octokiq
         client_push(CLASS_KEY => self, ARGS_KEY => args)
       end
 
-      def queue(name)
-        @@queue = name
+      def configuration
+        @configuration ||= Configuration.new
+      end
+
+      def octokiq_options(opts)
+        opts.slice(Configuration::OPTIONS).each do |key, value|
+          configuration.instance_variable_set("@#{key}", value)
+        end
       end
 
       private
 
       def client_push(item)
-        Octokiq.client_connection.push(@@queue, item)
+        Octokiq.client_connection.push(configuration.queue, item)
       end
     end
   end
