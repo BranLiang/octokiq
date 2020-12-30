@@ -6,7 +6,7 @@ module Octokiq
 
       loop do
         job = Octokiq.server_connection.fetch(queues)
-        pipe << job
+        Octokiq.configuration.force_thread_mode ? tube << job : pipe << job
       end
     end
 
@@ -15,12 +15,14 @@ module Octokiq
     def handle_pipe
       (1..Octokiq.configuration.processors_count).map do
         Ractor.new(pipe, tube) do |pipe, tube|
-          job = pipe.take
-          begin
-            Processor.new(job).run
-          rescue Ractor::IsolationError => e
-            Octokiq.logger.warn 'Ractor::IsolationError'
-            tube << job
+          loop do
+            job = pipe.take
+            begin
+              Processor.new(job).run
+            rescue Ractor::IsolationError => e
+              Octokiq.logger.warn 'Ractor::IsolationError'
+              tube << job
+            end
           end
         end
       end

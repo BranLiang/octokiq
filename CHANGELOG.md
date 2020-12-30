@@ -8,3 +8,8 @@ Initial release 🚀
 
 - Replace worker class configuration `queue` with `octokiq_options`
 - Enable non-ractor safe job running with traditional `Thread`
+
+## 0.1.2 - 2020-12-30
+
+- Fix the ractor server loop bug
+- Add configuration `force_thread_mode`
