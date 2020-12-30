@@ -1,15 +1,14 @@
 module Octokiq
   class Processor
-    attr_accessor :job
+    attr_accessor :klass, :args
     def initialize(job)
-      @job = job
+      klass_name = job.fetch(Worker::CLASS_KEY)
+      @args = job.fetch(Worker::ARGS_KEY)
+      @klass = Object.const_get(klass_name)
     end
 
     def run
-      Octokiq.logger.info "Job: #{job}"
-      klass = job.fetch(Worker::CLASS_KEY)
-      args = job.fetch(Worker::ARGS_KEY)
-      Object.const_get(klass).new.perform(*args)
+      klass.new.perform(*args)
     end
   end
 end

@@ -1,13 +1,8 @@
 module Octokiq
   class Server
     def start
-      (1..Octokiq.configuration.processors_count).map do
-        Ractor.new(pipe) do |pipe|
-          job = pipe.take
-          processor = Processor.new(job)
-          processor.run
-        end
-      end
+      handle_pipe
+      handle_tube
 
       loop do
         job = Octokiq.server_connection.fetch(queues)
@@ -17,12 +12,45 @@ module Octokiq
 
     private
 
+    def handle_pipe
+      (1..Octokiq.configuration.processors_count).map do
+        Ractor.new(pipe, tube) do |pipe, tube|
+          job = pipe.take
+          begin
+            Processor.new(job).run
+          rescue Ractor::IsolationError => e
+            Octokiq.logger.warn 'Ractor::IsolationError'
+            tube << job
+          end
+        end
+      end
+    end
+
+    def handle_tube
+      Thread.new do
+        loop do
+          job = tube.take
+          Thread.new do
+            Processor.new(job).run
+          end
+        end
+      end
+    end
+
     def queues
       Octokiq.configuration.queues
     end
 
     def pipe
       @pipe ||= Ractor.new do
+        loop do
+          Ractor.yield Ractor.receive
+        end
+      end
+    end
+
+    def tube
+      @tube ||= Ractor.new do
         loop do
           Ractor.yield Ractor.receive
         end

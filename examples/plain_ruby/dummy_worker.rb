@@ -1,7 +1,7 @@
 require 'octokiq'
 
 Octokiq.configure do |c|
-  c.queues = %i[high medium low]
+  c.queues = %i[default high medium low]
 end
 
 class Greeting
@@ -18,10 +18,19 @@ end
 class DummyWorker
   include Octokiq::Worker
 
-  queue :high
+  octokiq_options queue: :high
 
   def perform(name)
     greeting = Greeting.new(name)
     puts greeting.to_s
+  end
+end
+
+class NonRactorSafeWorker
+  include Octokiq::Worker
+
+  def perform
+    ENV['test']
+    puts 'Access ENV success'
   end
 end
