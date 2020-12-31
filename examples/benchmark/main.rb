@@ -1,11 +1,12 @@
+require 'bundler/setup'
 require 'redis'
 # require_relative './sidekiq'
 require_relative './octokiq_ractor'
 # require_relative './octokiq_thread'
-NUMBER_COUNT = 1_000_00
+require_relative './function'
 
 Redis.new.flushall
 
-(1..NUMBER_COUNT).each do |n|
+(1..Function::NUMBER_COUNT).each do |n|
   LoadWorker.perform_async(n)
 end

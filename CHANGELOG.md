@@ -13,3 +13,7 @@ Initial release 🚀
 
 - Fix the ractor server loop bug
 - Add configuration `force_thread_mode`
+
+## 0.1.3 - 2020-12-31
+
+- Seperate `server` and `client` concerns

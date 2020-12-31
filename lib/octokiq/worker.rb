@@ -1,14 +1,11 @@
 module Octokiq
   module Worker
-    CLASS_KEY = 'class'.freeze
-    ARGS_KEY = 'args'.freeze
-
     class Configuration
       OPTIONS = [:queue].freeze
       attr_accessor(*OPTIONS)
 
       def initialize
-        @queue = Octokiq.configuration.default_queue
+        @queue = Client.configuration.default_queue
       end
     end
 
@@ -18,7 +15,7 @@ module Octokiq
 
     module ClassMethods
       def perform_async(*args)
-        client_push(CLASS_KEY => self, ARGS_KEY => args)
+        _push(Consts::ITEM_CLASS_KEY => self, Consts::ITEM_ARGS_KEY => args)
       end
 
       def configuration
@@ -33,8 +30,8 @@ module Octokiq
 
       private
 
-      def client_push(item)
-        Octokiq.client_connection.push(configuration.queue, item)
+      def _push(item)
+        Client.push(configuration.queue, item)
       end
     end
   end

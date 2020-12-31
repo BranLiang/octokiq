@@ -1,6 +1,6 @@
 require 'octokiq'
 
-Octokiq.configure do |c|
+Octokiq::Server.configure do |c|
   c.queues = %i[default high medium low]
 end
 

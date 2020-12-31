@@ -1,3 +1,6 @@
+require 'redis'
+require 'json'
+
 module Octokiq
   class Connection
     attr_accessor :redis

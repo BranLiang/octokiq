@@ -1,16 +1,12 @@
-require 'redis'
-
-require 'etc'
-require 'logger'
-require 'json'
-require 'optparse'
-
 require 'octokiq/version'
-require 'octokiq/configuration'
+require 'octokiq/logger'
 require 'octokiq/connection'
-require 'octokiq/worker'
+require 'octokiq/consts'
+require 'octokiq/configuration'
 require 'octokiq/processor'
+require 'octokiq/client'
 require 'octokiq/server'
+require 'octokiq/worker'
 require 'octokiq/cmd'
 
 module Octokiq
@@ -23,14 +19,6 @@ module Octokiq
 
   def configuration
     @configuration ||= Configuration.new
-  end
-
-  def server_connection
-    @server_connection ||= Connection.new
-  end
-
-  def client_connection
-    @client_connection ||= Connection.new
   end
 
   def logger

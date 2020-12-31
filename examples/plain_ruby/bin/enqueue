@@ -4,4 +4,3 @@ require 'bundler/setup'
 require_relative '../dummy_worker'
 
 DummyWorker.perform_async('Bran')
-NonRactorSafeWorker.perform_async

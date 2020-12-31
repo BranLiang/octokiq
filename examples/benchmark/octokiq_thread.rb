@@ -2,8 +2,8 @@ require 'octokiq'
 require 'prime'
 require_relative './function'
 
-Octokiq.configure do |c|
-  c.force_thread_mode = true
+Octokiq::Server.configure do |c|
+  c.thread_mode = true
 end
 
 class LoadWorker
