@@ -63,16 +63,6 @@ module Octokiq
       end
     end
 
-    def thread_workers
-      @thread_workers = []
-      Thread.new do
-        while job = pipe.take
-          Processor.new(job).run
-        end
-      end
-      @thread_workers
-    end
-
     def concurrency
       @concurrency ||= configuration.concurrency
     end
